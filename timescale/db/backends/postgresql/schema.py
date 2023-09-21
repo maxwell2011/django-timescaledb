@@ -31,11 +31,14 @@ class TimescaleSchemaEditor(DatabaseSchemaEditor):
 
     sql_drop_primary_key = 'ALTER TABLE {table} DROP CONSTRAINT {pkey}'
 
+    # NOTE: public.create_hypertable solved the problem of whether or not "create_hypertable" is in the schema to begin with
+    #       but this is unique to Postgres 15+ and Timescale 2.4+, maybe, not sure.
     sql_add_hypertable = (
-        "SELECT create_hypertable("
+        "SELECT public.create_hypertable("
         "{table}, {partition_column}, "
         "chunk_time_interval => interval {interval}, "
-        "migrate_data => {migrate})"
+        "migrate_data => {migrate}, "
+        "if_not_exists => TRUE)"
     )
 
     sql_set_chunk_time_interval = 'SELECT set_chunk_time_interval({table}, interval {interval})'
