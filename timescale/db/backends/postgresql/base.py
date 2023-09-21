@@ -21,7 +21,7 @@ class DatabaseWrapper(base_impl.backend()):
         super().prepare_database()
         with self.cursor() as cursor:
             try:
-                cursor.execute('CREATE EXTENSION IF NOT EXISTS timescaledb')
+                cursor.execute('CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE')
             except ProgrammingError:  # permission denied
                 logger.warning(
                     'Failed to create "timescaledb" extension. '
