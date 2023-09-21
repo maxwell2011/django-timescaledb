@@ -8,6 +8,12 @@ A database backend and tooling for Timescaledb.
 
 Based on [gist](https://gist.github.com/dedsm/fc74f04eb70d78459ff0847ef16f2e7a) from WeRiot.
 
+Forked from the original at ![django-timescaledb](https://github.com/schlunsen/django-timescaledb)
+
+Tested (barely...) that this works with Postgres 15 and TimescaleDB 2.11.2~ubuntu22.04,
+Mainly just fixes the migration error that pops up using the latest/greatest versions of
+Ubuntu, Postgres (15), and TimescaleDB. Specifically, the SELECT create_hypertable(...) error during migrations
+
 ## Quick start
 
 1. Install via pip
